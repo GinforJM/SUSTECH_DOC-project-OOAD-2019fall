@@ -1,5 +1,5 @@
-import latex
-from latex import LatexBuildError
+from my_latex import latex
+from my_latex.latex.exc import LatexBuildError
 from directory_utils import Directory
 class LatexPdf:
     compiler = 'xelatex' # default compiler
@@ -19,9 +19,9 @@ class LatexPdf:
         self.compiler = compiler
         self.project_name = project_name
         self.main_document = main_document
-        self.__project_path = './'+self.project_name+'/'
-        self.__latex_path = self.__project_path+main_document
-        self.__output_path = self.__project_path+'{}.pdf'.format(project_name)
+        self.__project_path = self.project_name
+        self.__latex_path = self.__project_path+'/'
+        self.__output_path = self.__project_path+'{}.pdf'.format(main_document)
         self.__directory = Directory(self.__project_path)
 
         # self.__compile_state = True
@@ -37,7 +37,7 @@ class LatexPdf:
     def build_pdf(self):
         builder = latex.build.LatexMkBuilder(pdflatex=self.compiler)
         try:
-            pdf = builder.build_pdf(open(self.__latex_path), '-shell-escape')
+            pdf = builder.build_pdf(self.__latex_path, self.main_document)
             pdf.save_to(self.__output_path)
         except LatexBuildError as e:
             print('compile failed')

@@ -27,7 +27,7 @@ urlpatterns = [
     path(r'', views.initial),
     path(r'initial/', views.initial),
     #path(r'root', views.go_root),
-    path(r'open_fold', views.open_fold),
+   # path(r'open_fold', views.open_fold),
     path(r'creat_fold', views.creat_fold),
     path(r'index/<int:project_id>', views.index),
     path(r'index/open_pro_fold', views.open_cur_pro_fold),
@@ -42,4 +42,5 @@ urlpatterns = [
     path(r'logout/', views.logout),
     path(r'captcha', include('captcha.urls')),
     path(r'upload_file', views.upload),
+    path(r'invite_other', views.invite),
 ]

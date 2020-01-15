@@ -42,8 +42,9 @@ class Directory:
 
     def create_folder(self, folder_name):
         if not os.path.exists(self.cur_path + folder_name):
-            mkdir(self.cur_path + folder_name)
+            mkdir(self.cur_path + folder_name+'/')
             print('create a folder!')
+            print(self.cur_path + folder_name)
 
 
 

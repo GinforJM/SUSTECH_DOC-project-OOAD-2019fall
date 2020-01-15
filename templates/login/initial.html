@@ -7,6 +7,7 @@
     {% if request.session.is_login %}
 
         <div class="list-group">
+        <a href="#" data-theme="darkly" class="theme-link"></a>
             <a class="list-group-item active">
                 我创建的project
             </a>
@@ -19,9 +20,9 @@
         </div>
         <div class="list-group">
             <a class="list-group-item active">
-                我加入的project
+                我可以查看的project
             </a>
-            {% for item in pro_names %}
+            {% for item in pro_names2 %}
                 <a href=../index/{{ item.1 }} class="list-group-item">
                     <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                     {{ item.0 }}</a>
@@ -64,6 +65,7 @@
         <h1>你尚未登录，只能访问公开内容！</h1>
 
     {% endif %}
+      <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
     <script>
         function creatPro() {
           //  alert("ssss")
@@ -88,5 +90,22 @@
 
 
         }
+
+        var themes = {
+            "default": "//cdn.bootcss.com/bootswatch/3.3.7/readable/bootstrap.css",
+            "journal": "//cdn.bootcss.com/bootswatch/3.3.7/journal/bootstrap.css",
+            "cerulean": "//cdn.bootcss.com/bootswatch/3.3.7/cerulean/bootstrap.css",
+            "darkly": "//cdn.bootcss.com/bootswatch/3.3.7/darkly/bootstrap.css",
+            "flatly": "//cdn.bootcss.com/bootswatch/3.3.7/flatly/bootstrap.css",
+
+        }
+        $(function () {
+            var themesheet = $('<link href="' + themes['darkly'] + '" rel="stylesheet" />');
+            themesheet.appendTo('head');
+            $('.theme-link').click(function () {
+                var themeurl = themes[$(this).attr('data-theme')];
+                themesheet.attr('href', themeurl);
+            });
+        });
     </script>
 {% endblock %}

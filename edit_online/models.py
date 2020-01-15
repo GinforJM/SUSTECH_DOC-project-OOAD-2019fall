@@ -14,7 +14,7 @@ class Users(models.Model):
 
 class Project(models.Model):
     project_id = models.IntegerField(primary_key=True)
-    project_name = models.CharField(unique=True , max_length=40)
+    project_name = models.CharField(max_length=40)
     creator_id = models.IntegerField()
     type = models.CharField(max_length=10)
 
@@ -26,3 +26,6 @@ class Authorize(models.Model):
     project_id = models.IntegerField()
     user_id = models.IntegerField()
     can_write = models.IntegerField(default=0)
+    class Meta:
+        db_table = 'auth_pro'
+        unique_together=("project_id","user_id")
